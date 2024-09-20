@@ -6,6 +6,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors')
 
+const PORT = process.env.PORT || 3000
+
 const app = express();
 app.use(express.json());
 
@@ -179,8 +181,8 @@ const dbPassword = process.env.DB_PASS;
 mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@sistema-agendamento-bac.5riwz50.mongodb.net/?retryWrites=true&w=majority`)
     .then(() => {
         console.log('Conexão com o banco de dados estabelecida!');
-        app.listen(3000, () => {
-            console.log('Servidor rodando na porta 3000');
+        app.listen(PORT, () => {
+            console.log(`Servidor rodando na Porta ${PORT}`);
         });
     })
     .catch((error) => console.log('Erro ao conectar com o banco de dados:', error));
