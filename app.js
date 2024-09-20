@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: 'https://nome-do-seu-front.vercel.app', // URL do seu front-end hospedado na Vercel
+    origin: 'https://agendamento-chi.vercel.app', // URL do seu front-end hospedado na Vercel
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   }));
 
