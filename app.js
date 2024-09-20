@@ -11,7 +11,10 @@ const PORT = process.env.PORT || 3000
 const app = express();
 app.use(express.json());
 
-app.use(cors())
+app.use(cors({
+    origin: 'https://nome-do-seu-front.vercel.app', // URL do seu front-end hospedado na Vercel
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  }));
 
 // Definindo o modelo de usuário
 const userSchema = new mongoose.Schema({
