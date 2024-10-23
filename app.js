@@ -1,12 +1,12 @@
-require('dotenv').config();
+require('dotenv').config()
 
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
 // Carregando as rotas
-const authRoutes = require('./routes/authRoutes');
-const agendamentoRoutes = require('./routes/agendamentoRoutes');
+const authRoutes = require('./src/routes/authRoutes');
+const agendamentoRoutes = require('./src/routes/agendamentoRoutes');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
