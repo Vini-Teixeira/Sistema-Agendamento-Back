@@ -13,9 +13,17 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: 'http://localhost:4200', 
+    origin: function (origin, callback) {
+        if(!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not is allowed by CORS Policy'))
+        }
+    }, 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
+
+const allowedOrigins = ['http://localhost:4200', 'https://agendamento-chi.vercel.app']
 
 // Conexão com o banco de dados
 const dbUser = process.env.DB_USER;
