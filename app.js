@@ -1,4 +1,6 @@
-require('dotenv').config()
+// app.js
+
+require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -12,18 +14,20 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 
+const allowedOrigins = ['http://localhost:4200', 'https://agendamento-chi.vercel.app'];
+
+// Configurando o middleware de CORS
 app.use(cors({
     origin: function (origin, callback) {
-        if(!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true)
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
         } else {
-            callback(new Error('Not is allowed by CORS Policy'))
+            callback(new Error('Not allowed by CORS policy'));
         }
-    }, 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
-
-const allowedOrigins = ['http://localhost:4200', 'https://agendamento-chi.vercel.app']
 
 // Conexão com o banco de dados
 const dbUser = process.env.DB_USER;
