@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/',authMiddleware ,getAgendamentos)
 router.post('/',authMiddleware ,createAgendamentos)
-router.put('/',authMiddleware ,updateAgendamentos)
+router.put('/:id',authMiddleware ,updateAgendamentos)
 router.delete('/',authMiddleware ,deleteAgendamentos)
 
 module.exports = router
