@@ -49,6 +49,7 @@ const loginUsuario = async (req, res) => {
         }
 
         const secret = process.env.SECRET
+
         const token = jwt.sign({ id: user._id}, secret, {expiresIn: '1h'})
         res.status(200).json({msg: "Autenticado!", token})
     } catch (error) {
@@ -59,7 +60,7 @@ const loginUsuario = async (req, res) => {
 const getUserById = async (req, res) => {
     const id = req.params.id
     try {
-        const user = await User.findOne(id).select('-senha -confirmeSenha')
+        const user = await User.findById(id).select('-senha -confirmeSenha')
         if(!user) {
             return res.status(404).json({msg: "usuário não encontrado."})
         }
