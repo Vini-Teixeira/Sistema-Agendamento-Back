@@ -10,9 +10,9 @@ const getAgendamentos = async (req, res) => {
 }
 
 const createAgendamentos = async (req, res) => {
-    const { nome, telefone, placa, servico } = req.body
+    const { nome, telefone, placa, servico, preco } = req.body
 
-    if(!nome || !telefone || !placa || !servico) {
+    if(!nome || !telefone || !placa || !servico || !preco) {
         return res.status(400).json({msg: "Todos os campos são obrigatórios."})
     }
 
@@ -22,7 +22,7 @@ const createAgendamentos = async (req, res) => {
             return res.status(409).json({msg: "Agendamento já existe com essas informações."})
         }
 
-        const novoAgendamento = new Agendamento({nome, telefone, placa, servico})
+        const novoAgendamento = new Agendamento({nome, telefone, placa, servico, preco})
         const agendamentoSalvo = await novoAgendamento.save()
         res.status(200).json(agendamentoSalvo)
     } catch (error) {
@@ -32,7 +32,7 @@ const createAgendamentos = async (req, res) => {
 
 const updateAgendamentos = async (req, res) => {
     const { id } = req.params
-    const { nome, telefone, placa, servico } = req.body
+    const { nome, telefone, placa, servico, preco } = req.body
 
     try {
         const agendamento = await Agendamento.findById(id)
@@ -44,6 +44,7 @@ const updateAgendamentos = async (req, res) => {
         agendamento.telefone = telefone
         agendamento.placa = placa
         agendamento.servico = servico
+        agendamento.preco = preco
 
         const agendamentoAtualizado = await agendamento.save()
         res.status(200).json(agendamentoAtualizado)
